@@ -167,7 +167,7 @@ for dataset in snapshots.keys():
         continue
 
 for dataset in sorted(snapshots.keys()):
-    print dataset
+    print(dataset)
     
     sorted_snapshots = sorted(snapshots[dataset], key=lambda snapshot: snapshots[dataset][snapshot]['creation'])
     most_recent = sorted_snapshots[-1]
@@ -223,19 +223,19 @@ for dataset in sorted(snapshots.keys()):
                     if 'reference' in used_intervals[interval]:
                         reference = time.strftime(used_intervals[interval]['reference'], time.gmtime(float(epoch)))
                         if reference in rollup_intervals[interval] and rollup_intervals[interval][reference] == epoch:
-                            print used_intervals[interval]['abbreviation'],
+                            print(used_intervals[interval]['abbreviation'],)
                         else:
                             print('-'),
                     if 'interval' in used_intervals[interval]:
                         if epoch in rollup_intervals[interval]:
-                            print used_intervals[interval]['abbreviation'],
+                            print(used_intervals[interval]['abbreviation'],)
                         else:
                             print('-'),
                 if 'keep' in snapshots[dataset][snapshot]:
-                    print snapshots[dataset][snapshot]['keep'][0],
+                    print(snapshots[dataset][snapshot]['keep'][0],)
                 else:
                     print('-'),
-                print snapshots[dataset][snapshot]['used']
+                print(snapshots[dataset][snapshot]['used'])
             else:
                 print
         

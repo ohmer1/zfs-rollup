@@ -116,4 +116,4 @@ if args.test:
 if args.verbose:
     command += "-v "
 for target in delete_targets:
-    print command + target
+    print(command + target)

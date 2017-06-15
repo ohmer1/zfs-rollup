@@ -102,6 +102,6 @@ while snapshot_was_deleted:
 for dataset in sorted(deleted.keys()):
     if not deleted[dataset]:
         continue
-    print dataset
+    print(dataset)
     for snapshot in sorted(deleted[dataset].keys()):
         print("\t"), snapshot, deleted[dataset][snapshot]['used']
