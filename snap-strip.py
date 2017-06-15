@@ -37,7 +37,7 @@ for dataset in args.datasets:
     subp = subprocess.Popen(["zfs", "get", "-t", "snapshot", "-Hrpo", "name,property,value", "type,creation,used,freenas:state", dataset], stdout=subprocess.PIPE)
     zfs_snapshots = subp.communicate()[0]
     if subp.returncode:
-        print "zfs get failed with RC=%s" % subp.returncode
+        print("zfs get failed with RC=%s") % subp.returncode
         sys.exit(1)
 
     for snapshot in zfs_snapshots.splitlines():

@@ -84,7 +84,7 @@ if args.intervals:
             try:
                 int(count)
             except ValueError:
-                print "invalid count: "+count
+                print("invalid count: ")+count
                 sys.exit(1)
             
             if period in intervals:
@@ -99,14 +99,14 @@ if args.intervals:
                         used_intervals[interval] = { 'max' : count, 'interval' : int(period) }
                         
                 except ValueError:
-                    print "invalid period: "+period
+                    print("invalid period: ")+period
                     sys.exit(1)
                     
         elif interval.count(':') == 0 and interval in intervals:
             used_intervals[interval] = intervals[interval]
             
         else:
-            print "invalid interval: "+interval
+            print("invalid interval: ")+interval
             sys.exit(1)            
 
 for interval in used_intervals:
@@ -119,7 +119,7 @@ for dataset in args.datasets:
     subp = subprocess.Popen(["zfs", "get", "-Hrpo", "name,property,value", "creation,type,used,freenas:state", dataset], stdout=subprocess.PIPE)
     zfs_snapshots = subp.communicate()[0]
     if subp.returncode:
-        print "zfs get failed with RC=%s" % subp.returncode
+        print("zfs get failed with RC=%s") % subp.returncode
         sys.exit(1)
 
     for snapshot in zfs_snapshots.splitlines():
@@ -137,7 +137,7 @@ for dataset in args.datasets:
         # enforce that this is a snapshot starting with one of the requested prefixes
         if not any(map(snapshot.startswith, args.prefix)):
             if property == 'creation':
-                print "ignoring:\t", dataset+"@"+snapshot
+                print("ignoring:\t", dataset+"@")+snapshot
             continue
         
         snapshots[dataset][snapshot][property] = value
@@ -217,7 +217,7 @@ for dataset in sorted(snapshots.keys()):
                     prune = False
 
         if prune or args.verbose:
-            print "\t","pruning\t" if prune else " \t", "@"+snapshot, 
+            print("\t","pruning\t" if prune else " \t", "@")+snapshot, 
             if args.verbose:
                 for interval in used_intervals.keys():
                     if 'reference' in used_intervals[interval]:
@@ -225,16 +225,16 @@ for dataset in sorted(snapshots.keys()):
                         if reference in rollup_intervals[interval] and rollup_intervals[interval][reference] == epoch:
                             print used_intervals[interval]['abbreviation'],
                         else:
-                            print '-',
+                            print('-'),
                     if 'interval' in used_intervals[interval]:
                         if epoch in rollup_intervals[interval]:
                             print used_intervals[interval]['abbreviation'],
                         else:
-                            print '-',
+                            print('-'),
                 if 'keep' in snapshots[dataset][snapshot]:
                     print snapshots[dataset][snapshot]['keep'][0],
                 else:
-                    print '-',
+                    print('-'),
                 print snapshots[dataset][snapshot]['used']
             else:
                 print
